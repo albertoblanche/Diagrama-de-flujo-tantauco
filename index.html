@@ -10,96 +10,82 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <style>
   :root {
-    --cream: #F2EDE3;
-    --cream2: #EAE4D8;
-    --dark: #1C3A2A;
-    --green: #2D5A3D;
-    --green2: #3B6D11;
-    --gold: #C9A84C;
-    --text: #1C3A2A;
-    --text2: #4A6355;
-    --text3: #7A9585;
-    --border: #D5CCBB;
-    --border2: #C4BAA8;
-    --white: #FFFFFF;
+    --cream:#F2EDE3; --cream2:#EAE4D8; --dark:#1C3A2A; --green:#2D5A3D; --green2:#3B6D11;
+    --gold:#C9A84C; --text:#1C3A2A; --text2:#4A6355; --text3:#7A9585;
+    --border:#D5CCBB; --border2:#C4BAA8; --white:#FFFFFF;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html,body { height:100%; overflow:hidden; }
-  body { font-family:'DM Sans',sans-serif; font-weight:300; background:var(--cream); color:var(--text); display:flex; flex-direction:column; }
-  ::-webkit-scrollbar { width:5px; height:5px; }
-  ::-webkit-scrollbar-thumb { background:var(--green); border-radius:3px; }
-  ::-webkit-scrollbar-track { background:var(--cream2); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;overflow:hidden;}
+  body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--text);display:flex;flex-direction:column;}
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px;}
+  ::-webkit-scrollbar-track{background:var(--cream2);}
 
-  /* HEADER */
-  header { background:var(--dark); color:var(--cream); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; z-index:100; border-bottom:1px solid rgba(201,168,76,0.25); }
-  .header-title { font-family:'Playfair Display',serif; font-size:22px; color:var(--cream); font-weight:400; }
-  .header-sub { font-size:11px; color:var(--gold); letter-spacing:0.18em; text-transform:uppercase; margin-top:2px; font-weight:500; }
-  .controls { display:flex; gap:8px; align-items:center; }
-  .btn { background:rgba(255,255,255,0.06); border:1px solid rgba(201,168,76,0.3); color:var(--cream); padding:7px 14px; border-radius:8px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:400; transition:all 0.16s; }
-  .btn:hover { background:rgba(201,168,76,0.18); border-color:var(--gold); }
-  .btn.active { background:var(--gold); border-color:var(--gold); color:var(--dark); font-weight:500; }
-  .btn-icon { padding:7px 11px; min-width:36px; }
-  .zoom-display { color:var(--cream); font-size:11px; min-width:48px; text-align:center; opacity:0.7; }
-  .divider { width:1px; height:22px; background:rgba(201,168,76,0.3); margin:0 4px; }
+  header{background:var(--dark);color:var(--cream);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:100;border-bottom:1px solid rgba(201,168,76,0.25);}
+  .header-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);font-weight:400;}
+  .header-sub{font-size:11px;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;margin-top:2px;font-weight:500;}
+  .controls{display:flex;gap:8px;align-items:center;}
+  .btn{background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.3);color:var(--cream);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;transition:all 0.16s;}
+  .btn:hover{background:rgba(201,168,76,0.18);border-color:var(--gold);}
+  .btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:500;}
+  .btn-icon{padding:7px 11px;min-width:36px;}
+  .zoom-display{color:var(--cream);font-size:11px;min-width:48px;text-align:center;opacity:0.7;}
+  .divider{width:1px;height:22px;background:rgba(201,168,76,0.3);margin:0 4px;}
 
-  /* MAIN */
-  .main { display:flex; flex:1; overflow:hidden; }
-  .diagram-area { flex:1; overflow:hidden; position:relative; cursor:grab; background:var(--cream); background-image:radial-gradient(circle at 1px 1px, rgba(28,58,42,0.06) 1px, transparent 0); background-size:24px 24px; }
-  .diagram-area:active { cursor:grabbing; }
-  .diagram-viewport { position:absolute; top:0; left:0; transform-origin:0 0; padding:60px; }
-  .mermaid { background:transparent !important; }
-  .mermaid svg text { font-family:'DM Sans',sans-serif !important; font-size:13px !important; fill:inherit !important; }
-  .mermaid .edgeLabel text { font-size:11px !important; fill:var(--text2) !important; }
-  .mermaid .edgeLabel rect { fill:var(--cream) !important; }
-  .mermaid .edgePath path { stroke-width:1.6px !important; }
-  .mermaid .node.clickable { cursor:pointer !important; }
-  .mermaid .node.clickable:hover rect, .mermaid .node.clickable:hover polygon { filter:brightness(0.95); stroke-width:2.5px !important; }
+  .main{display:flex;flex:1;overflow:hidden;}
+  .diagram-area{flex:1;overflow:hidden;position:relative;cursor:grab;background:var(--cream);background-image:radial-gradient(circle at 1px 1px,rgba(28,58,42,0.06) 1px,transparent 0);background-size:24px 24px;}
+  .diagram-area:active{cursor:grabbing;}
+  .diagram-viewport{position:absolute;top:0;left:0;transform-origin:0 0;padding:60px;}
+  .mermaid{background:transparent !important;}
+  .mermaid svg text{font-family:'DM Sans',sans-serif !important;fill:inherit !important;}
+  .mermaid .edgeLabel text{font-size:11px !important;fill:var(--text2) !important;}
+  .mermaid .edgeLabel rect{fill:var(--cream) !important;}
+  .mermaid .edgePath path{stroke-width:1.6px !important;}
+  .mermaid .node.clickable{cursor:pointer !important;}
+  .mermaid .node.clickable:hover rect,.mermaid .node.clickable:hover polygon{filter:brightness(0.94);stroke-width:3px !important;}
 
-  /* HINT */
-  .hint { position:absolute; top:18px; left:50%; transform:translateX(-50%); background:var(--dark); color:var(--cream); font-size:11px; padding:8px 16px; border-radius:24px; pointer-events:none; opacity:1; transition:opacity 0.8s; box-shadow:0 4px 14px rgba(28,58,42,0.18); z-index:50; white-space:nowrap; }
-  .hint .gold { color:var(--gold); margin:0 6px; }
+  .hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);background:var(--dark);color:var(--cream);font-size:11px;padding:8px 16px;border-radius:24px;pointer-events:none;opacity:1;transition:opacity 0.8s;box-shadow:0 4px 14px rgba(28,58,42,0.18);z-index:50;white-space:nowrap;}
+  .hint .gold{color:var(--gold);margin:0 6px;}
 
-  /* LEGEND */
-  .legend { position:absolute; bottom:16px; left:16px; background:var(--white); border:1.5px solid var(--border); border-radius:12px; padding:12px 16px; display:flex; gap:14px; flex-wrap:wrap; box-shadow:0 2px 8px rgba(28,58,42,0.06); z-index:50; }
-  .legend-item { display:flex; align-items:center; gap:7px; font-size:11px; color:var(--text2); }
-  .legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; border:1.5px solid; }
+  .legend{position:absolute;bottom:16px;left:16px;background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;gap:14px;flex-wrap:wrap;box-shadow:0 2px 8px rgba(28,58,42,0.06);z-index:50;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2);}
+  .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;border:1.5px solid;}
 
-  /* SIDE PANEL */
-  .side-panel { width:0; background:var(--white); border-left:1.5px solid var(--border); overflow:hidden; transition:width 0.3s ease; flex-shrink:0; display:flex; flex-direction:column; box-shadow:-4px 0 20px rgba(28,58,42,0.08); }
-  .side-panel.open { width:50vw; }
-  .panel-header { background:var(--dark); color:var(--cream); padding:24px 36px 20px; flex-shrink:0; position:relative; }
-  .panel-close { position:absolute; top:14px; right:20px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:var(--cream); width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
-  .panel-close:hover { background:rgba(201,168,76,0.25); border-color:var(--gold); }
-  .panel-eyebrow { font-size:10px; color:var(--gold); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:8px; font-weight:500; }
-  .panel-title { font-family:'Playfair Display',serif; font-size:22px; color:var(--cream); line-height:1.25; font-weight:400; margin-bottom:10px; }
-  .panel-sub { font-size:12px; color:rgba(242,237,227,0.7); margin-bottom:14px; font-weight:300; line-height:1.5; }
-  .panel-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
-  .resp-badge { background:rgba(201,168,76,0.18); border:1px solid rgba(201,168,76,0.4); color:var(--gold); padding:4px 11px; border-radius:20px; font-size:10.5px; letter-spacing:0.04em; font-weight:500; }
-  .panel-body { flex:1; overflow-y:auto; padding:26px 36px 60px; }
-  .panel-section { margin-bottom:26px; }
-  .panel-section h4 { font-size:10px; color:var(--gold); letter-spacing:0.18em; text-transform:uppercase; font-weight:500; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-  .panel-section p { font-size:13px; color:var(--text); line-height:1.65; font-weight:300; }
-  .nbox { background:var(--cream); border:1px solid var(--border2); border-left:3px solid var(--dark); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text2); line-height:1.6; margin-bottom:14px; }
-  .nbox strong { color:var(--text); font-weight:500; }
-  .item-list { list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:7px; }
-  .item-list li { background:var(--cream); border:1px solid var(--border); border-radius:9px; padding:10px 13px; font-size:12.5px; color:var(--text); line-height:1.55; display:flex; gap:10px; align-items:flex-start; font-weight:300; margin-bottom:0; }
-  .item-list li::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; margin-top:7px; }
-  .event-list { list-style:none; padding:0; }
-  .event-list li { font-size:12px; color:var(--text2); padding:6px 0 6px 18px; position:relative; line-height:1.5; font-weight:300; border-bottom:1px solid rgba(213,204,187,0.5); }
-  .event-list li:last-child { border-bottom:none; }
-  .event-list li::before { content:"›"; position:absolute; left:4px; color:var(--gold); font-weight:600; }
-  .tools-row { display:flex; flex-wrap:wrap; gap:6px; }
-  .tool-pill { background:var(--cream2); border:1px solid var(--border); color:var(--text); padding:5px 11px; border-radius:20px; font-size:11px; }
-  .auto-list { list-style:none; padding:0; }
-  .auto-list li { background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.25); border-left:3px solid var(--gold); border-radius:8px; padding:10px 13px; margin-bottom:7px; font-size:12px; color:var(--text); line-height:1.55; font-weight:300; }
-  .sub-section { margin-top:14px; }
-  .sub-section-title { font-family:'Playfair Display',serif; font-size:14px; color:var(--text); margin-bottom:6px; font-weight:600; }
-  .sub-section-desc { font-size:12px; color:var(--text2); line-height:1.55; font-weight:300; margin-bottom:10px; }
-  .vote-box { background:rgba(201,168,76,0.08); border:1.5px solid rgba(201,168,76,0.35); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
-  .vote-box h5 { font-size:11px; color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; font-weight:500; margin-bottom:8px; }
-  .vote-box p { font-size:12px; color:var(--text); line-height:1.6; font-weight:300; }
-  .vote-box .rule { margin-top:8px; font-size:12px; color:var(--text2); font-weight:400; }
-  .vote-box .rule strong { color:var(--dark); font-weight:500; }
+  .side-panel{width:0;background:var(--white);border-left:1.5px solid var(--border);overflow:hidden;transition:width 0.3s ease;flex-shrink:0;display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(28,58,42,0.08);}
+  .side-panel.open{width:50vw;}
+  .panel-header{background:var(--dark);color:var(--cream);padding:24px 36px 20px;flex-shrink:0;position:relative;}
+  .panel-close{position:absolute;top:14px;right:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--cream);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+  .panel-close:hover{background:rgba(201,168,76,0.25);border-color:var(--gold);}
+  .panel-eyebrow{font-size:10px;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:8px;font-weight:500;}
+  .panel-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);line-height:1.25;font-weight:400;margin-bottom:10px;}
+  .panel-sub{font-size:12px;color:rgba(242,237,227,0.7);margin-bottom:14px;font-weight:300;line-height:1.5;}
+  .panel-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+  .resp-badge{background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:4px 11px;border-radius:20px;font-size:10.5px;letter-spacing:0.04em;font-weight:500;}
+  .panel-body{flex:1;overflow-y:auto;padding:26px 36px 60px;}
+  .panel-section{margin-bottom:26px;}
+  .panel-section h4{font-size:10px;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;font-weight:500;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .panel-section p{font-size:13px;color:var(--text);line-height:1.65;font-weight:300;}
+  .nbox{background:var(--cream);border:1px solid var(--border2);border-left:3px solid var(--dark);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:14px;}
+  .nbox strong{color:var(--text);font-weight:500;}
+  .item-list{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+  .item-list li{background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:12.5px;color:var(--text);line-height:1.55;display:flex;gap:10px;align-items:flex-start;font-weight:300;}
+  .item-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:7px;}
+  .event-list{list-style:none;padding:0;}
+  .event-list li{font-size:12px;color:var(--text2);padding:6px 0 6px 18px;position:relative;line-height:1.5;font-weight:300;border-bottom:1px solid rgba(213,204,187,0.5);}
+  .event-list li:last-child{border-bottom:none;}
+  .event-list li::before{content:"›";position:absolute;left:4px;color:var(--gold);font-weight:600;}
+  .tools-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .tool-pill{background:var(--cream2);border:1px solid var(--border);color:var(--text);padding:5px 11px;border-radius:20px;font-size:11px;}
+  .auto-list{list-style:none;padding:0;}
+  .auto-list li{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--gold);border-radius:8px;padding:10px 13px;margin-bottom:7px;font-size:12px;color:var(--text);line-height:1.55;font-weight:300;}
+  .sub-section{margin-top:14px;}
+  .sub-section-title{font-family:'Playfair Display',serif;font-size:14px;color:var(--text);margin-bottom:6px;font-weight:600;}
+  .sub-section-desc{font-size:12px;color:var(--text2);line-height:1.55;font-weight:300;margin-bottom:10px;}
+  .vote-box{background:rgba(201,168,76,0.08);border:1.5px solid rgba(201,168,76,0.35);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+  .vote-box h5{font-size:11px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;font-weight:500;margin-bottom:8px;}
+  .vote-box p{font-size:12px;color:var(--text);line-height:1.6;font-weight:300;}
+  .vote-box .rule{margin-top:8px;font-size:12px;color:var(--text2);font-weight:400;white-space:pre-line;}
+  .vote-box .rule strong{color:var(--dark);font-weight:500;}
 </style>
 </head>
 <body>
@@ -131,12 +117,14 @@
       <span class="gold">·</span> Click en nodos para ver detalle
     </div>
     <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#D4EDDA;border-color:#1C6B32"></div> Etapa principal</div>
       <div class="legend-item"><div class="legend-dot" style="background:#EAF3DE;border-color:#3B6D11"></div> Pipeline</div>
       <div class="legend-item"><div class="legend-dot" style="background:#E1F5EE;border-color:#0F6E56"></div> Cierre / DD</div>
       <div class="legend-item"><div class="legend-dot" style="background:#EEEDFE;border-color:#534AB7"></div> Portfolio</div>
       <div class="legend-item"><div class="legend-dot" style="background:#FAEEDA;border-color:#BA7517"></div> Declined</div>
       <div class="legend-item"><div class="legend-dot" style="background:#F1EFE8;border-color:#888780"></div> Hold</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#FFFFFF;border-color:#C4BAA8"></div> Acción</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFF8E7;border-color:#C9A84C"></div> Memo</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFFFFF;border-color:#C4BAA8"></div> Accion</div>
     </div>
   </div>
 
@@ -147,215 +135,196 @@
 </div>
 
 <script>
-  // ── PANEL DATA ─────────────────────────────────────────────
-  const panelData = {
-    SCOUTING: {
-      eyebrow:'Etapa 1 · Investment Pipeline', title:'Scouting', sub:'Identificar y contactar startups',
-      responsables:['Analyst'],
-      storage:'Plataforma Tantauco › Scouting',
-      description:'Primera etapa del pipeline. El analista identifica startups con thesis fit, las contacta y les envía un form. El form se convierte automáticamente en un deal en la plataforma, centralizando todos los datos desde el inicio.',
-      note:'<strong>Excepción:</strong> Founders de Serie A o muy senior pueden saltarse el form e ir directo a reunión. En ese caso el deal se crea manualmente en la plataforma. Esta regla es implícita y no aparece en el diagrama.',
-      info:['Nombre empresa','País','Sector / vertical','Etapa de financiamiento','Fuente de origen','URL web / LinkedIn','Email o contacto del founder','Descripción y condiciones de la ronda'],
-      tasks:['Identificar startup (Harmonic, referencias, eventos, otros fondos, investigación activa)','Evaluar fit con tesis — si no hace fit, descartar sin registrar nada','Buscar contacto: Harmonic primero, LinkedIn si no hay email','Contactar al founder por email o LinkedIn','Enviar form a la startup','Revisar form recibido: si cumple tesis → agendar reunión · si no → Declined','Revisión mensual de los que no respondieron el form: 2do intento · sin respuesta → Declined'],
-      events:['Startup identificada','Founder contactado','Form enviado al founder','Form recibido y revisado','Form cumple tesis → deal creado activo → agendar reunión','Form no cumple tesis → deal creado como Declined','Sin respuesta tras 2 intentos → Declined'],
-      tools:['Harmonic','LinkedIn','Gmail','Plataforma Tantauco','DF+ / DFmás'],
-      subs:[
-        {t:'Fuentes de deals',d:'Harmonic (GPT mode), referencias de LPs/founders/otros fondos, reuniones mensuales con fondos VC de LATAM, eventos, investigación activa en noticias.'},
-        {t:'El form de Scouting',d:'Form corto que incluye overview de la startup, condiciones de la ronda y datos del founder. Al enviarse, se crea automáticamente como deal en la plataforma. Si no cumple tesis, queda registrado como Declined igualmente — toda la data se guarda.'},
-        {t:'Reuniones con otros fondos VC',d:'Cada 2 meses. Solo se comparten startups que ya NO están en pipeline activo. Nunca startups siendo analizadas.'}
-      ],
-      automations:['Automatización semanal (N8N) noticias startups LATAM desde DF+, TechCrunch y Contxto','Scraper de correos + contacto en frío via Clay o Apollo con Gmail','Lead scoring automático por thesis fit antes de contactar','Follow-up automático si no hay respuesta al form en 7 días']
-    },
-    SCREENING: {
-      eyebrow:'Etapa 2 · Investment Pipeline', title:'Screening', sub:'Primera reunión + Comité Screening',
-      responsables:['Analyst'],
-      storage:'Plataforma Tantauco › Screening',
-      description:'El founder aceptó reunirse. El analista realiza la primera reunión con Granola, completa el Overview en la plataforma y prepara el One Pager con el skill de Claude para presentar en el Comité Screening.',
-      note:'<strong>REQUISITO:</strong> Overview completo en Plataforma Tantauco antes de presentar en el Comité Screening. Sin Overview no se puede presentar.',
-      info:['Country + Founded + Website + LinkedIn + Harmonic link','Descripción del negocio','Target Customer','Revenue Model','Go To Market','Categories, Verticals, Industries, Business Models','Notas de la primera reunión','Métricas y datos adicionales'],
-      tasks:['Confirmar la reunión y enviar el invite por Gmail','Realizar la reunión y tomar notas activamente','Verificar que Granola grabó y transcribió correctamente','Completar Overview obligatorio en Plataforma Tantauco','Generar One Pager con el skill de Claude','Presentar en Comité Screening (5 minutos)','Registrar votación y comentarios en plataforma','Documentar la decisión final'],
-      events:['Primera reunión agendada','Primera reunión realizada con Granola','Overview completado en plataforma (requisito)','One Pager generado','Presentada en Comité Screening','Suma votos < 16 → Declined','Suma votos ≥ 16 → votos y comentarios registrados → Pre-Comité'],
-      tools:['Google Meet','Gmail','Granola','Plataforma Tantauco','Claude (skill One Pager)'],
-      voto:{
-        titulo:'Comité Screening — Votación Fibonacci',
-        participantes:'Analysts + Associate + Practicante (4 personas: Juan Pablo, Beto, Pedro, Gabo)',
-        escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',
-        regla:'Suma total ≥ 16 → pasa a Pre-Comité. Suma < 16 → Declined.',
-        extra:'Se registran los votos individuales y los comentarios de cada participante en la plataforma.'
-      },
-      automations:['Auto-rellenado del Overview desde transcripción de Granola con N8N o Claude Cowork','Generación automática del One Pager con skill de Claude a partir de la transcripción y datos de plataforma']
-    },
-    PRECOMITE: {
-      eyebrow:'Etapa 3 · Investment Pipeline', title:'Pre-Comité', sub:'Análisis profundo + recomendación',
-      responsables:['Analyst','Associate','Practicante'],
-      storage:'Plataforma Tantauco › Pre-Comité',
-      description:'El equipo de análisis (sin Partners) profundiza en la startup. Se solicita el Data Room, se hace el análisis completo y se presenta en el Pre-Comité. En paralelo, se comienza a armar el Investment Memo en Notion.',
-      note:'Los Partners <strong>no participan</strong> en esta instancia. El Pre-Comité es la instancia donde el equipo de análisis decide si recomienda o no la inversión antes de involucrar a los Partners.',
-      info:['Data Room completo','P&L + proyecciones financieras','KPIs históricos y actuales','Análisis de mercado (TAM/SAM/SOM)','Mapa de competidores y benchmarks','Análisis de cohorte de clientes','Unit economics (CAC, LTV, LTV/CAC, payback)','Referencias del equipo fundador (mín. 2)','Referencias de clientes sobre el producto (mín. 2)'],
-      tasks:['Escribir email al founder solicitando Data Room','Analizar Data Room recibido','Completar análisis de mercado (TAM/SAM/SOM) con fuentes','Mapear competidores directos e indirectos + benchmarks','Análisis de cohorte de clientes y retención','Calcular unit economics: CAC, LTV, LTV/CAC, payback period','Si hay competencia directa en la región → contactar para inteligencia competitiva','Consultar referencias del equipo fundador (mín. 2)','Consultar referencias de clientes del producto (mín. 2)','Iniciar armado del Investment Memo en Notion en paralelo','Presentar en Pre-Comité con votación Fibonacci','Registrar votos y comentarios en plataforma','Si hay dudas → Q&A por email con founders, dudas anotadas en plataforma'],
-      events:['Email enviado solicitando Data Room','Data Room recibido','Análisis profundo completado','Memo iniciado en Notion (paralelo)','Presentada en Pre-Comité','Suma votos < 16 → No recomienda → Declined o Hold','Suma votos ≥ 16 con dudas → Q&A founders → si se despeja → Comité Interno','Suma votos ≥ 16 sin dudas → Comité Interno'],
-      tools:['Gmail','Granola','Plataforma Tantauco','Notion (Investment Memo)','Google Docs'],
-      voto:{
-        titulo:'Pre-Comité — Votación Fibonacci',
-        participantes:'Analysts + Associate + Practicante (4 personas: Juan Pablo, Beto, Pedro, Gabo)',
-        escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',
-        regla:'Suma total ≥ 16 → recomienda inversión → pasa a Comité Interno. Suma < 16 → no recomienda → Declined o Hold.',
-        extra:'Se registran los votos individuales y los comentarios de cada participante en la plataforma.'
-      },
-      automations:['Análisis automático de documentos del Data Room con IA','Generación automática del análisis de mercado (TAM/SAM/SOM) con datos en tiempo real','Template de email de solicitud de Data Room personalizado por sector']
-    },
-    COMITEI: {
-      eyebrow:'Etapa 4 · Investment Pipeline', title:'Comité Interno', sub:'Decisión oficial de Tantauco',
-      responsables:['Analyst','Associate','Practicante','Partner'],
-      storage:'Plataforma Tantauco › Comité Interno',
-      description:'Instancia donde participa todo el equipo incluyendo los Partners. Se realiza la segunda reunión con los founders, liderada por el Partner. Es la decisión oficial del fondo: si pasa, se agenda el External Committee.',
-      note:'Los Partners tienen <strong>poder de veto</strong> independiente de la suma de votos. Para pasar al External Committee se necesita cumplir al menos una de las condiciones de aprobación.',
-      info:['Data Room completo revisado','Análisis profundo del Pre-Comité','Investment Memo en progreso','Referencias del equipo y producto consultadas','Q&A con founders resuelto (si aplica)'],
-      tasks:['Coordinar segunda reunión con Founders + Partners (ambos coordinan, Partner lidera)','Realizar segunda reunión y verificar que Granola transcribe','Profundizar en founders: background, visión, capacidad de ejecución','Continuar avanzando el Investment Memo en Notion en paralelo','Presentar en Comité Interno con votación Fibonacci','Registrar votos, comentarios y decisión final en plataforma','Si aprueba → definir fecha del External Committee'],
-      events:['Segunda reunión agendada','Segunda reunión realizada con Granola','Presentada en Comité Interno','Condición A: suma votos Partners ≥ 16 → pasa a EC','Condición B: algún miembro del equipo vota 13 → pasa a EC','Ninguna condición cumplida + veto Partner → Declined o Hold','Fecha del External Committee definida'],
-      tools:['Google Meet','Gmail','Granola','Plataforma Tantauco','Notion (Investment Memo)'],
-      voto:{
-        titulo:'Comité Interno — Votación Fibonacci',
-        participantes:'Todo el equipo: Analysts + Associate + Practicante + Partners',
-        escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',
-        regla:'Pasa a EC si cumple ALGUNA de estas condiciones:\n• Condición A: suma de votos de los Partners ≥ 16\n• Condición B: al menos un miembro del equipo (Analyst/Associate/Practicante) vota 13',
-        extra:'Los Partners tienen poder de veto independiente de la suma total. Si un Partner veta, la startup no pasa aunque se cumplan las condiciones numéricas.'
-      }
-    },
-    MEMO: {
-      eyebrow:'Etapa paralela · Investment Pipeline', title:'Investment Memo', sub:'Se arma en paralelo desde Pre-Comité',
-      responsables:['Analyst','Partner'],
-      storage:'Notion › Carpeta Investment Memos',
-      description:'El memo se empieza a armar en paralelo desde el Pre-Comité. Se va completando por secciones a medida que avanza el análisis. Al llegar al External Committee ya debe estar avanzado o completo.',
-      note:'Se arma sobre un boceto base en Notion. JP está desarrollando un <strong>proyecto de Claude por startup</strong> que funciona como notebook LM del proceso: se va soltando info en el chat y el memo se arma automáticamente por secciones.',
-      info:['Info acumulada desde Screening y Pre-Comité','Transcripciones de Granola de todas las reuniones','Data Room completo','Q&A respondido por el founder (si aplica)','Memos anteriores como referencia de formato'],
-      tasks:['Iniciar boceto en Notion desde el Pre-Comité','Ir completando secciones a medida que avanza el análisis','Usar proyecto de Claude por startup para ir volcando info automáticamente','Enviar borrador al Partner para revisión antes del EC','Todo el equipo revisa y comenta el memo','Partner aprueba el memo → se procede al EC'],
-      events:['Memo iniciado en Notion (desde Pre-Comité)','Secciones completadas progresivamente','Borrador enviado al Partner','Todo el equipo revisó y comentó','Partner aprueba el memo → listo para EC'],
-      tools:['Notion (Investment Memos)','Granola','Plataforma Tantauco','Claude (proyecto por startup)'],
-      subs:[
-        {t:'Estructura del memo (6 secciones)',d:'1. Executive Summary · 2. Equipo · 3. Solución · 4. Oportunidad de mercado · 5. Análisis financiero · 6. Oportunidad de inversión'},
-        {t:'Proyecto de Claude por startup',d:'JP está desarrollando un proyecto de Claude por startup que funciona como notebook LM del proceso de inversión. Se va volcando la info a medida que avanza el análisis y el memo se arma automáticamente por secciones. Al final sirve como repositorio de todo el conocimiento generado sobre la startup.'}
-      ],
-      automations:['Proyecto de Claude por startup: genera el memo automáticamente por secciones a medida que se le va soltando información','Sección de mercado auto-generada con datos en tiempo real usando búsqueda web']
-    },
-    EC: {
-      eyebrow:'Etapa 5 · Investment Pipeline', title:'External Committee', sub:'Decisión final con expertos externos',
-      responsables:['Partner'],
-      storage:'Plataforma Tantauco',
-      description:'Comité externo donde los Partners presentan la startup junto a expertos del sector. Se decide definitivamente si se aprueba o rechaza el cheque. El equipo de análisis no participa.',
-      note:'<strong>Participantes:</strong> Partners del fondo · Venture Partner (requerido) · Advisor del sector. El memo debe estar aprobado antes de este comité.',
-      info:['Investment Memo aprobado por el Partner','Expertos del sector confirmados','Presentación ejecutiva del deal','Risk assessment final'],
-      tasks:['Partner coordina comité y gestiona logística','Partner envía Investment Memo a todos los miembros con anticipación','Partner prepara presentación ejecutiva del deal','Partners documentan feedback y decisión en plataforma'],
-      events:['Expertos confirmados','Comité agendado','Investment Memo enviado a los miembros','External Committee realizado','Feedback documentado','Aprobado → Due Diligence Legal','Rechazado → Declined'],
-      tools:['Google Meet','Notion (memo)','Plataforma Tantauco','Gmail']
-    },
-    DD: {
-      eyebrow:'Etapa 6 · Investment Pipeline', title:'Due Diligence Legal', sub:'Partner + Abogados',
-      responsables:['Partner','Abogados'],
-      storage:'Plataforma Tantauco + Google Drive',
-      description:'Due diligence legal completa liderada por el Partner con apoyo de abogados externos. Term Sheet y DD corren en paralelo. Se verifica que la estructura legal no tenga impedimentos para la inversión.',
-      note:'¿Red flags bloqueantes? → Declined · ¿Condiciones negociables? → resolver y cerrar · ¿Sin issues? → Inversión.',
-      info:['Documentos corporativos y acta de constitución','Cap table legal completa','Contratos laborales clave','Propiedad intelectual (IP)','Contratos con clientes y proveedores clave','Litigios y contingencias pendientes','Cumplimiento regulatorio'],
-      tasks:['Contratar o coordinar abogados externos','Compartir Data Room con los abogados','Negociar Term Sheet en paralelo con la DD','Hacer seguimiento al avance de la DD','Revisar informe de DD entregado por abogados','Negociar condiciones si es necesario','Documentar conclusiones y decisión en plataforma'],
-      events:['Abogados externos contratados','DD legal iniciada','Term Sheet en negociación','Informe de DD recibido','Red flag legal identificado','Condiciones negociadas y resueltas','DD completada sin issues → cierre'],
-      tools:['Abogados externos','Data Room','Gmail','Google Drive']
-    },
-    INVESTED: {
-      eyebrow:'Etapa 7 · Investment Pipeline', title:'Invested', sub:'Cierre formal + inicio portfolio',
-      responsables:['Partner','Abogados','Analyst'],
-      storage:'Plataforma Tantauco',
-      description:'Una vez completada la DD Legal, se procede al cierre formal. Firma, transferencia de fondos y registro oficial. La startup inicia el Portfolio Monitoring.',
-      note:'El cierre es liderado por el Partner y los abogados. <strong>El Analyst apoya</strong> en el registro en plataforma y prepara el mini-memo para LPs.',
-      info:['Term sheet firmado','Documentos de cierre (SHA, SPA u otros)','Confirmación de transferencia de fondos','Monto, valoración y % equity','Vehículo e instrumento de inversión','Cap table post-inversión','Fecha de cierre'],
-      tasks:['Firma de documentos de cierre','Transferencia de fondos','Confirmar cierre legal con abogados','Registrar en Carta y en Plataforma Tantauco','Armar mini-memo resumen para LPs','Notificar al founder y al equipo interno','Iniciar proceso de Portfolio Monitoring (Onboarding)'],
-      events:['Term sheet firmado','Documentos de cierre preparados','Documentos firmados por ambas partes','Transferencia realizada','Cierre legal confirmado','Startup marcada como Invested en plataforma','LPs notificados','Startup ingresa al Portfolio Monitoring'],
-      tools:['Abogados','DocuSign / Firma física','Gmail','Plataforma Tantauco'],
-      automations:['Generación automática del mini-memo para LPs a partir del Investment Memo y datos de plataforma']
-    },
-    DECLINED: {
-      eyebrow:'Estado especial', title:'Declined', sub:'Descartada del pipeline',
-      responsables:['Analyst'],
-      storage:'Plataforma Tantauco › Declined',
-      description:'La startup fue descartada del pipeline. Se documenta el motivo para aprendizaje interno. Puede reactivarse si cambian las condiciones. El deal siempre queda creado en la plataforma — toda la data se guarda.',
-      note:'Una startup Declined <strong>puede reactivarse</strong> si cambian las condiciones. Incluso los forms que no cumplieron tesis quedan registrados como Declined con toda su información.',
-      info:['Motivo del rechazo','Etapa en que fue descartada','Feedback enviado al founder (si aplica)'],
-      tasks:['Documentar motivo del decline en plataforma','Enviar email de feedback al founder si corresponde','Marcar como Declined en el pipeline'],
-      events:['Decisión de decline tomada','Motivo documentado en plataforma','Email de feedback enviado (opcional)'],
-      tools:['Plataforma Tantauco','Gmail'],
-      automations:['Template de email de decline personalizado según motivo (en desarrollo)']
-    },
-    HOLD: {
-      eyebrow:'Estado especial', title:'Hold', sub:'Follow-up cada 2-3 meses',
-      responsables:['Analyst'],
-      storage:'Plataforma Tantauco › Hold',
-      description:'Startups que generan interés pero no en este momento. Se mantiene contacto activo cada 2-3 meses para recibir actualizaciones y evaluar si el timing cambió.',
-      note:'<strong>Responsabilidad del analista:</strong> mantener contacto activo. No dejar que se enfríen. Revisión cada 2 meses para definir next steps.',
-      info:['Motivo del Hold','Fecha de último contacto','Próxima fecha de seguimiento','Updates recibidos'],
-      tasks:['Documentar motivo del Hold en plataforma','Anotar fecha de recontacto','Enviar email de check-in cada 2-3 meses','Registrar updates recibidos','Evaluar en cada check-in si se reactiva o se declina'],
-      events:['Startup puesta en Hold','Follow-up enviado (cada 2-3 meses)','Update recibida del founder','Startup reactivada al pipeline','Startup promovida a Declined'],
-      tools:['Plataforma Tantauco','Gmail'],
-      automations:['Recordatorio automático cada 2 meses para follow-up a startups en Hold','Monitoreo automático de noticias de startups en Hold']
-    },
-    ONB: {
-      eyebrow:'M1 · Portfolio Monitoring', title:'Onboarding', sub:'Bienvenida al portfolio',
-      responsables:['Analyst','Partner'],
-      storage:'Plataforma Tantauco',
-      description:'Inmediatamente después del cierre, la startup ingresa al Portfolio Monitoring. Se da la bienvenida formal, se establece la cadencia de trabajo y se hace una primera categorización del nivel de soporte requerido.',
-      note:'Un buen onboarding establece la base de confianza con los founders.',
-      info:['Equipo fundador y contactos clave','Métricas baseline al cierre','Necesidades prioritarias del founder','Categorización inicial: tier y áreas de valor'],
-      tasks:['Confirmar asignación de dupla Partner + Analyst en plataforma','Categorización inicial: tier, cercanía, áreas de valor, necesidades prioritarias','Enviar onboarding email con Founder form y Quarterly form','Agendar y realizar kick-off con founders (Granola activado)','Estructurar insights del kick-off en plataforma','Agendar reuniones recurrentes con cadencia acordada'],
-      events:['Dupla asignada en plataforma','Categorización inicial completada','Onboarding email enviado','Founder form recibido','Quarterly form enviado','Kick-off realizado con Granola','Reuniones recurrentes agendadas'],
-      tools:['Plataforma Tantauco','Gmail','Google Meet','Granola'],
-      subs:[
-        {t:'Tier',d:'Clasificación según potencial de retorno y etapa actual. Permite priorizar dónde dedicar más tiempo del equipo. Se define a los 3 meses en portfolio.'},
-        {t:'Áreas de valor',d:'¿En qué puede ayudar más Tantauco: fundraising, intros B2B, hiring, estrategia, expansión regional? Se recoge en el Founder form y se discute en el kick-off.'},
-        {t:'Propuesta de valor del portfolio',d:'Red de fondos para intros, perks y créditos (Anthropic, tokens), red de empresas en Chile para intros B2B, red de advisors y Venture Partners.'}
-      ],
-      automations:['Envío automático trimestral del Quarterly form a cada startup del portfolio']
-    },
-    REC: {
-      eyebrow:'M2 · Portfolio Monitoring', title:'Reuniones Recurrentes', sub:'Seguimiento activo continuo',
-      responsables:['Analyst','Partner'],
-      storage:'Plataforma Tantauco + Granola',
-      description:'Proceso continuo durante toda la vida de la inversión. Reuniones mensuales de touch point con Granola, recolección trimestral de métricas via Quarterly form, y registro estructurado en plataforma.',
-      note:'<strong>Frecuencia:</strong> reunión mensual + Quarterly form trimestral (día 15 de abril, julio, octubre, enero).',
-      info:['KPIs del período','Updates del equipo y producto','Blockers y necesidades','Notas de la reunión anterior','Cambios en equipo, mercado o estrategia'],
-      tasks:['Preparar reunión: repasar notas anteriores y métricas','Realizar reunión mensual con Partner y verificar que Granola graba','Estructurar insights de transcripción post-reunión','Actualizar plataforma: métricas, notas, próximos pasos','Enviar Quarterly form el día 15 del mes trimestral','Analizar métricas del trimestre','Identificar oportunidades de valor y coordinar con Partner'],
-      events:['Reunión mensual agendada','Reunión realizada con Granola','Insights registrados en plataforma','Métricas actualizadas','Quarterly form enviado (día 15) y procesado','Categorización actualizada si corresponde'],
-      tools:['Google Meet','Granola','Plataforma Tantauco','Gmail'],
-      subs:[
-        {t:'Contenido estándar de la reunión mensual',d:'Estado general del negocio · Métricas clave (ARR/MRR, crecimiento, churn, runway) · Blockers y necesidades · Fundraising · Cambios en equipo, producto o estrategia.'},
-        {t:'Quarterly form (trimestral)',d:'MRR/ARR al cierre · Crecimiento MoM · Clientes activos · Churn rate · Burn rate y runway · Hitos cumplidos y proyectados · Novedades del equipo · Necesidades donde Tantauco puede apoyar.'}
-      ],
-      automations:['Bot de noticias pre-reunión con insights y preguntas útiles para el founder','Agente Granola → Plataforma Tantauco: estructura automáticamente notas y métricas post-reunión','Agentes de señales por startup: LinkedIn, menciones en prensa, cambios de cargo']
-    },
-    SUP: {
-      eyebrow:'M3 · Portfolio Monitoring', title:'Soporte Activo', sub:'5 tracks de valor proactivos',
-      responsables:['Partner','Principal','Analyst'],
-      storage:'Plataforma Tantauco',
-      description:'Más allá del capital, Tantauco busca ser un aliado real. El soporte activo cubre cinco tracks de valor concreto y corre en paralelo con las reuniones recurrentes de forma permanente.',
-      note:'El soporte <strong>no es reactivo</strong> — el equipo busca proactivamente formas de agregar valor según la etapa y tier de cada startup.',
-      info:['Necesidades actuales de la startup','BBDD de fondos de inversión','Red de empresas y contactos B2B en Chile','Perks y beneficios disponibles','Vacantes de hiring de las startups'],
-      tasks:['Identificar necesidades en cada reunión mensual','Coordinar intros a fondos o clientes B2B','Gestionar acceso a perks y beneficios','Publicar y difundir vacantes de hiring del portfolio','Registrar todas las intros y su resultado en plataforma','Mantener grupo de WhatsApp activo con mensajes de valor','Explorar nuevas formas de entregar valor proactivamente'],
-      events:['Intro a fondo realizada y resultado registrado','Intro B2B realizada y resultado registrado','Perk activado','Sesión de apoyo estratégico realizada','Vacante publicada','Nueva forma de valor identificada'],
-      tools:['Gmail','LinkedIn','WhatsApp','Plataforma Tantauco','Notion perks'],
-      subs:[
-        {t:'Track 1 · Estrategia',d:'Apoyo del Partner en fundraising, revisión de deck y Data Room, expansión regional y decisiones estratégicas.'},
-        {t:'Track 2 · Intros a inversores',d:'BBDD de fondos para intros cuando la startup está levantando ronda. Se registra cada intro y resultado en plataforma.'},
-        {t:'Track 3 · Intros B2B',d:'Conexiones con potenciales clientes o socios de la red de Tantauco en Chile y LATAM.'},
-        {t:'Track 4 · Perks',d:'Créditos de Anthropic, tokens, descuentos con proveedores. Pendiente: portal centralizado para founders.'},
-        {t:'Track 5 · Comunidad',d:'Grupo de WhatsApp activo con todas las startups del portfolio. El equipo envía mensajes regulares de valor.'}
-      ],
-      automations:['Portal de recursos del portfolio para founders (en desarrollo)','Matching automático de intros a fondos y B2B según perfil de la startup']
-    }
-  };
+const panelData = {
+  SCOUTING:{
+    eyebrow:'Etapa 1 · Investment Pipeline',title:'Scouting',sub:'Identificar y contactar startups',
+    responsables:['Analyst'],storage:'Plataforma Tantauco › Scouting',
+    description:'Primera etapa del pipeline. El analista identifica startups con thesis fit, las contacta y les envía un form. El form se convierte automáticamente en un deal en la plataforma, centralizando todos los datos desde el inicio.',
+    note:'<strong>Excepción:</strong> Founders de Serie A o muy senior pueden saltarse el form e ir directo a reunión. En ese caso el deal se crea manualmente. Esta regla es implícita y no aparece en el diagrama.',
+    info:['Nombre empresa','País','Sector / vertical','Etapa de financiamiento','Fuente de origen','URL web / LinkedIn','Email o contacto del founder','Descripción y condiciones de la ronda'],
+    tasks:['Identificar startup (Harmonic, referencias, eventos, otros fondos, noticias)','Evaluar fit con tesis — si no hace fit, descartar sin registrar','Buscar contacto: Harmonic primero, LinkedIn si no hay email','Contactar al founder por email o LinkedIn','Enviar form a la startup','Revisar form: si cumple tesis → agendar reunión · si no → Declined','Revisión mensual sin respuesta: 2do intento · sin respuesta → Declined'],
+    events:['Startup identificada','Founder contactado','Form enviado al founder','Form recibido y revisado','Form cumple tesis → deal activo → agendar reunión','Form no cumple tesis → deal creado como Declined','Sin respuesta tras 2 intentos → Declined'],
+    tools:['Harmonic','LinkedIn','Gmail','Plataforma Tantauco','DF+ / DFmás'],
+    subs:[
+      {t:'Fuentes de deals',d:'Harmonic (GPT mode), referencias de LPs/founders/otros fondos, reuniones mensuales con fondos VC de LATAM, eventos, investigación activa en noticias.'},
+      {t:'El form de Scouting',d:'Form corto con overview de la startup, condiciones de la ronda y datos del founder. Al enviarse, se crea automáticamente como deal en la plataforma. Si no cumple tesis, queda registrado como Declined — toda la data se guarda.'},
+      {t:'Reuniones con otros fondos VC',d:'Cada 2 meses. Solo se comparten startups que ya NO están en pipeline activo.'}
+    ],
+    automations:['Automatización semanal (N8N) noticias startups LATAM','Scraper de correos + contacto en frío via Clay o Apollo','Lead scoring automático por thesis fit antes de contactar','Follow-up automático si no hay respuesta al form en 7 días']
+  },
+  SCREENING:{
+    eyebrow:'Etapa 2 · Investment Pipeline',title:'Screening',sub:'Primera reunión + Comité Screening',
+    responsables:['Analyst'],storage:'Plataforma Tantauco › Screening',
+    description:'El founder aceptó reunirse. El analista realiza la primera reunión con Granola, completa el Overview y genera el One Pager con el skill de Claude para presentar en el Comité Screening.',
+    note:'<strong>REQUISITO:</strong> Overview completo en Plataforma Tantauco antes de presentar. Sin Overview no se puede presentar en el Comité Screening.',
+    info:['Country + Founded + Website + LinkedIn + Harmonic link','Descripción del negocio','Target Customer','Revenue Model','Go To Market','Categories, Verticals, Industries, Business Models','Notas de la primera reunión','Métricas y datos adicionales'],
+    tasks:['Confirmar la reunión y enviar invite por Gmail','Realizar la reunión y tomar notas activamente','Verificar que Granola grabó y transcribió correctamente','Completar Overview obligatorio en Plataforma Tantauco','Generar One Pager con el skill de Claude','Presentar en Comité Screening (5 minutos)','Registrar votación y comentarios en plataforma','Documentar la decisión final'],
+    events:['Primera reunión agendada','Reunión realizada con Granola','Overview completado (requisito)','One Pager generado','Presentada en Comité Screening','Suma votos < 16 → Declined','Suma votos ≥ 16 → votos y comentarios registrados → Pre-Comité'],
+    tools:['Google Meet','Gmail','Granola','Plataforma Tantauco','Claude (skill One Pager)'],
+    voto:{titulo:'Comité Screening — Votación Fibonacci',participantes:'Analysts + Associate + Practicante (4 personas: Juan Pablo, Beto, Pedro, Gabo)',escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',regla:'Suma total ≥ 16 → pasa a Pre-Comité\nSuma < 16 → Declined',extra:'Se registran los votos individuales y los comentarios de cada participante en la plataforma.'},
+    automations:['Auto-rellenado del Overview desde transcripción de Granola','Generación automática del One Pager con skill de Claude']
+  },
+  PRECOMITE:{
+    eyebrow:'Etapa 3 · Investment Pipeline',title:'Pre-Comité',sub:'Análisis profundo + recomendación',
+    responsables:['Analyst','Associate','Practicante'],storage:'Plataforma Tantauco › Pre-Comité',
+    description:'El equipo de análisis (sin Partners) profundiza en la startup. Se solicita el Data Room, se hace el análisis completo y se presenta en el Pre-Comité cuando haya info suficiente. En paralelo, se comienza a armar el Investment Memo en Notion. Esta etapa puede durar semanas.',
+    note:'Los Partners <strong>no participan</strong> en esta instancia. Solo se vota cuando se estima que hay información suficiente para recomendar o no la inversión.',
+    info:['Data Room completo','P&L + proyecciones financieras','KPIs históricos y actuales','Análisis de mercado (TAM/SAM/SOM)','Mapa de competidores y benchmarks','Análisis de cohorte de clientes','Unit economics (CAC, LTV, LTV/CAC, payback)','Referencias del equipo fundador (mín. 2)','Referencias de clientes sobre el producto (mín. 2)'],
+    tasks:['Solicitar Data Room al founder','Analizar Data Room recibido','Completar análisis de mercado (TAM/SAM/SOM) con fuentes','Mapear competidores + benchmarks','Análisis de cohorte y unit economics','Consultar referencias del equipo fundador (mín. 2)','Consultar referencias de clientes (mín. 2)','Si hay competencia en la región → contactar para inteligencia','Iniciar Investment Memo en Notion en paralelo','Evaluar si hay info suficiente para votar — si no, continuar análisis','Presentar en Pre-Comité con votación Fibonacci','Registrar votos y comentarios en plataforma'],
+    events:['Email enviado solicitando Data Room','Data Room recibido','Análisis profundo completado','Memo iniciado en Notion (paralelo)','Info insuficiente → continúa análisis','Info suficiente → presentación Pre-Comité','Suma votos < 16 → Declined o Hold','Q&A con founders si hay dudas → Comité Interno','Suma votos ≥ 16 sin dudas → Comité Interno'],
+    tools:['Gmail','Granola','Plataforma Tantauco','Notion (Investment Memo)','Google Docs'],
+    voto:{titulo:'Pre-Comité — Votación Fibonacci',participantes:'Analysts + Associate + Practicante (4 personas: Juan Pablo, Beto, Pedro, Gabo)',escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',regla:'Suma total ≥ 16 → recomienda inversión → pasa a Comité Interno\nSuma < 16 → no recomienda → Declined o Hold',extra:'Se registran los votos individuales y los comentarios de cada participante. Solo se vota cuando se estima que hay información suficiente.'},
+    automations:['Análisis automático de documentos del Data Room con IA','Generación automática del análisis de mercado con datos en tiempo real','Template de email de solicitud de Data Room personalizado por sector']
+  },
+  COMITEI:{
+    eyebrow:'Etapa 4 · Investment Pipeline',title:'Comité Interno',sub:'Decisión oficial de Tantauco',
+    responsables:['Analyst','Associate','Practicante','Partner'],storage:'Plataforma Tantauco › Comité Interno',
+    description:'Instancia donde participa todo el equipo incluyendo los Partners. Se realiza la segunda reunión con los founders, liderada por el Partner. Los Partners pueden pedir análisis adicional o Q&A antes de votar.',
+    note:'Los Partners tienen <strong>poder de veto</strong> independiente de la suma de votos. Para pasar al External Committee se necesita cumplir al menos una de las dos condiciones de aprobación.',
+    info:['Data Room completo revisado','Análisis profundo del Pre-Comité','Investment Memo en progreso','Referencias del equipo y producto consultadas','Q&A con founders resuelto (si aplica)'],
+    tasks:['Coordinar segunda reunión con Founders + Partners (ambos coordinan, Partner lidera)','Realizar segunda reunión y verificar que Granola transcribe','Continuar avanzando el Investment Memo en Notion','Evaluar si los Partners necesitan más análisis o Q&A','Resolver dudas antes de votar','Presentar en Comité Interno con votación Fibonacci','Registrar votos, comentarios y decisión en plataforma','Si aprueba → definir fecha del External Committee'],
+    events:['Segunda reunión agendada','Segunda reunión realizada con Granola','Partners piden más análisis → loop de análisis adicional','Q&A adicional con founders si es necesario','Presentada en Comité Interno','Condición A: suma votos Partners ≥ 16 → pasa a EC','Condición B: algún miembro del equipo vota 13 → pasa a EC','Veto Partner o ninguna condición → Declined o Hold','Fecha del External Committee definida'],
+    tools:['Google Meet','Gmail','Granola','Plataforma Tantauco','Notion (Investment Memo)'],
+    voto:{titulo:'Comité Interno — Votación Fibonacci',participantes:'Todo el equipo: Analysts + Associate + Practicante + Partners',escala:'Fibonacci 1 · 2 · 3 · 5 · 8 · 13',regla:'Pasa a EC si cumple ALGUNA de estas condiciones:\n• Condición A: suma de votos de los Partners ≥ 16\n• Condición B: al menos un miembro del equipo vota 13',extra:'Los Partners tienen poder de veto. Si un Partner veta, la startup no pasa aunque se cumplan las condiciones numéricas.'}
+  },
+  MEMO:{
+    eyebrow:'Etapa paralela · Investment Pipeline',title:'Investment Memo',sub:'Se arma en paralelo desde Pre-Comité',
+    responsables:['Analyst','Partner'],storage:'Notion › Carpeta Investment Memos',
+    description:'El memo se empieza a armar en paralelo desde el Pre-Comité. Se va completando por secciones a medida que avanza el análisis. Al llegar al External Committee ya debe estar avanzado o completo.',
+    note:'Se arma sobre un boceto base en Notion. JP está desarrollando un <strong>proyecto de Claude por startup</strong> que funciona como notebook LM: se va soltando info en el chat y el memo se arma automáticamente por secciones.',
+    info:['Info acumulada desde Screening y Pre-Comité','Transcripciones de Granola de todas las reuniones','Data Room completo','Q&A respondido por el founder (si aplica)','Memos anteriores como referencia de formato'],
+    tasks:['Iniciar boceto en Notion desde el Pre-Comité','Ir completando secciones a medida que avanza el análisis','Usar proyecto de Claude por startup para ir volcando info automáticamente','Enviar borrador al Partner para revisión antes del EC','Todo el equipo revisa y comenta el memo','Partner aprueba el memo → se procede al EC'],
+    events:['Memo iniciado en Notion (desde Pre-Comité)','Secciones completadas progresivamente','Borrador enviado al Partner','Todo el equipo revisó y comentó','Partner aprueba el memo → listo para EC'],
+    tools:['Notion (Investment Memos)','Granola','Plataforma Tantauco','Claude (proyecto por startup)'],
+    subs:[
+      {t:'Estructura del memo (6 secciones)',d:'1. Executive Summary · 2. Equipo · 3. Solución · 4. Oportunidad de mercado · 5. Análisis financiero · 6. Oportunidad de inversión'},
+      {t:'Proyecto de Claude por startup',d:'Proyecto de Claude por startup que funciona como notebook LM del proceso. Se va volcando la info a medida que avanza el análisis y el memo se arma automáticamente por secciones.'}
+    ],
+    automations:['Proyecto de Claude por startup: genera el memo automáticamente por secciones','Sección de mercado auto-generada con datos en tiempo real']
+  },
+  MEMO_FIN:{
+    eyebrow:'Etapa 5 · Investment Pipeline',title:'Investment Memo — Revisión final',sub:'Revisar y aprobar antes del EC',
+    responsables:['Analyst','Partner'],storage:'Notion › Carpeta Investment Memos',
+    description:'El memo ya está avanzado gracias al trabajo paralelo. En esta etapa todo el equipo lo revisa y el Partner lo aprueba antes de presentarlo al External Committee.',
+    note:'<strong>Estructura del memo (6 secciones):</strong> 1. Executive Summary · 2. Equipo · 3. Solución · 4. Oportunidad de mercado · 5. Análisis financiero · 6. Oportunidad de inversión',
+    tasks:['Todo el equipo revisa el memo y comenta dudas e inquietudes','Analyst incorpora los comentarios del equipo','Partner revisa versión final y aprueba','Memo listo → se procede al EC'],
+    tools:['Notion (Investment Memos)','Gmail','Claude (proyecto por startup)']
+  },
+  EC:{
+    eyebrow:'Etapa 6 · Investment Pipeline',title:'External Committee',sub:'Decisión final con expertos externos',
+    responsables:['Partner'],storage:'Plataforma Tantauco',
+    description:'Comité externo donde los Partners presentan la startup junto a expertos del sector. Se decide definitivamente si se aprueba o rechaza el cheque. El equipo de análisis no participa.',
+    note:'<strong>Participantes:</strong> Partners del fondo · Venture Partner (requerido) · Advisor del sector.',
+    info:['Investment Memo aprobado por el Partner','Expertos del sector confirmados','Presentación ejecutiva del deal','Risk assessment final'],
+    tasks:['Partner coordina comité y gestiona logística','Partner envía Investment Memo a todos con anticipación','Partner prepara presentación ejecutiva','Partners documentan feedback y decisión en plataforma'],
+    events:['Expertos confirmados','Comité agendado','Investment Memo enviado','External Committee realizado','Feedback documentado','Aprobado → Due Diligence Legal','Rechazado → Declined'],
+    tools:['Google Meet','Notion (memo)','Plataforma Tantauco','Gmail']
+  },
+  DD:{
+    eyebrow:'Etapa 7 · Investment Pipeline',title:'Due Diligence Legal',sub:'Partner + Abogados',
+    responsables:['Partner','Abogados'],storage:'Plataforma Tantauco + Google Drive',
+    description:'Due diligence legal completa liderada por el Partner con apoyo de abogados externos. Term Sheet y DD corren en paralelo.',
+    note:'¿Red flags bloqueantes? → Declined · ¿Condiciones negociables? → resolver y cerrar · ¿Sin issues? → Inversión.',
+    info:['Documentos corporativos y acta de constitución','Cap table legal completa','Contratos laborales clave','Propiedad intelectual (IP)','Contratos con clientes y proveedores','Litigios y contingencias pendientes','Cumplimiento regulatorio'],
+    tasks:['Contratar o coordinar abogados externos','Compartir Data Room con los abogados','Negociar Term Sheet en paralelo con la DD','Hacer seguimiento al avance de la DD','Revisar informe de DD','Negociar condiciones si es necesario','Documentar conclusiones y decisión'],
+    events:['Abogados externos contratados','DD legal iniciada','Term Sheet en negociación','Informe de DD recibido','Red flag identificado','Condiciones resueltas','DD completada sin issues → cierre'],
+    tools:['Abogados externos','Data Room','Gmail','Google Drive']
+  },
+  INVESTED:{
+    eyebrow:'Etapa 8 · Investment Pipeline',title:'Invested',sub:'Cierre formal + inicio portfolio',
+    responsables:['Partner','Abogados','Analyst'],storage:'Plataforma Tantauco',
+    description:'Una vez completada la DD Legal, se procede al cierre formal. Firma, transferencia de fondos y registro oficial. La startup inicia el Portfolio Monitoring.',
+    note:'El cierre es liderado por el Partner y los abogados. <strong>El Analyst apoya</strong> en el registro en plataforma y prepara el mini-memo para LPs.',
+    info:['Term sheet firmado','Documentos de cierre (SHA, SPA u otros)','Confirmación de transferencia de fondos','Monto, valoración y % equity','Cap table post-inversión','Fecha de cierre'],
+    tasks:['Firma de documentos de cierre','Transferencia de fondos','Confirmar cierre legal con abogados','Registrar en Carta y en Plataforma Tantauco','Armar mini-memo resumen para LPs','Notificar al founder y al equipo interno','Iniciar proceso de Portfolio Monitoring (Onboarding)'],
+    events:['Term sheet firmado','Documentos firmados por ambas partes','Transferencia realizada','Cierre legal confirmado','Startup marcada como Invested','LPs notificados','Startup ingresa al Portfolio Monitoring'],
+    tools:['Abogados','DocuSign / Firma física','Gmail','Plataforma Tantauco'],
+    automations:['Generación automática del mini-memo para LPs a partir del Investment Memo y datos de plataforma']
+  },
+  DECLINED:{
+    eyebrow:'Estado especial',title:'Declined',sub:'Descartada del pipeline',
+    responsables:['Analyst'],storage:'Plataforma Tantauco › Declined',
+    description:'La startup fue descartada del pipeline. Se documenta el motivo para aprendizaje interno. Puede reactivarse si cambian las condiciones. El deal siempre queda creado en la plataforma — toda la data se guarda.',
+    note:'Una startup Declined <strong>puede reactivarse</strong> si cambian las condiciones. Incluso los forms que no cumplieron tesis quedan registrados con toda su información.',
+    info:['Motivo del rechazo','Etapa en que fue descartada','Feedback enviado al founder (si aplica)'],
+    tasks:['Documentar motivo del decline en plataforma','Enviar email de feedback al founder si corresponde','Marcar como Declined en el pipeline','Incluir en el boletín mensual de rechazos'],
+    events:['Decisión de decline tomada','Motivo documentado en plataforma','Email de feedback enviado (opcional)','Startup incluida en boletín mensual'],
+    tools:['Plataforma Tantauco','Gmail'],
+    subs:[{t:'Boletín mensual de rechazos',d:'Cada mes se envía internamente un boletín con todas las startups rechazadas ese mes. Incluye: nombre de la startup, un one-liner de qué hace, y la razón del rechazo. Sirve para aprendizaje interno y benchmarking.'}],
+    automations:['Template de email de decline personalizado según motivo','Generación automática del boletín mensual de rechazos desde datos de la plataforma']
+  },
+  HOLD:{
+    eyebrow:'Estado especial',title:'Hold',sub:'Follow-up cada 2-3 meses',
+    responsables:['Analyst'],storage:'Plataforma Tantauco › Hold',
+    description:'Startups que generan interés pero no en este momento. Se mantiene contacto activo cada 2-3 meses para recibir actualizaciones y evaluar si el timing cambió.',
+    note:'<strong>Responsabilidad del analista:</strong> mantener contacto activo. No dejar que se enfríen. Revisión cada 2 meses para definir next steps.',
+    info:['Motivo del Hold','Fecha de último contacto','Próxima fecha de seguimiento','Updates recibidos'],
+    tasks:['Documentar motivo del Hold en plataforma','Anotar fecha de recontacto','Enviar email de check-in cada 2-3 meses','Registrar updates recibidos','Evaluar en cada check-in si se reactiva o se declina'],
+    events:['Startup puesta en Hold','Follow-up enviado (cada 2-3 meses)','Update recibida del founder','Startup reactivada al pipeline','Startup promovida a Declined'],
+    tools:['Plataforma Tantauco','Gmail'],
+    automations:['Recordatorio automático cada 2 meses para follow-up','Monitoreo automático de noticias de startups en Hold']
+  },
+  ONB:{
+    eyebrow:'M1 · Portfolio Monitoring',title:'Onboarding',sub:'Bienvenida al portfolio',
+    responsables:['Analyst','Partner'],storage:'Plataforma Tantauco',
+    description:'Inmediatamente después del cierre, la startup recibe la bienvenida formal al portfolio de Tantauco. Se establece la cadencia de trabajo, se comparten los recursos disponibles y se recopila la información base para el seguimiento.',
+    note:'Un buen onboarding establece la base de confianza con los founders desde el primer día.',
+    info:['Equipo fundador y contactos clave','Cap table actualizado con la nueva ronda','Quarterly Report actual y del trimestre anterior','Métricas baseline al cierre','Necesidades prioritarias del founder'],
+    tasks:['Enviar correo de bienvenida al portfolio','Compartir información sobre perks disponibles','Explicar el Quarterly Report y solicitar el actual + el trimestre anterior','Agendar la reunión recurrente mensual','Agregar al founder al grupo de WhatsApp del portfolio','Solicitar cap table actualizado con la nueva ronda'],
+    events:['Correo de bienvenida enviado','Info de perks compartida','Quarterly form actual y anterior solicitados','Reunión recurrente agendada','Founder agregado al grupo de WhatsApp','Cap table actualizado recibido'],
+    tools:['Gmail','WhatsApp','Plataforma Tantauco','Google Meet'],
+    subs:[
+      {t:'Correo de bienvenida',d:'Presenta formalmente al equipo de Tantauco, explica cómo va a ser la relación y qué pueden esperar del fondo.'},
+      {t:'Perks disponibles',d:'Créditos de Anthropic, tokens, descuentos con proveedores tecnológicos. Se comparte el detalle completo de todos los beneficios disponibles.'},
+      {t:'Quarterly Report',d:'Se explica la dinámica del seguimiento trimestral y se solicita el form del trimestre actual y del anterior para tener una línea base de métricas.'},
+      {t:'Cap table',d:'Se solicita el cap table actualizado con la ronda que acaban de cerrar. Si la ronda aún no está cerrada formalmente, se pide que lo envíen cuando se cierre.'}
+    ],
+    automations:['Envío automático trimestral del Quarterly form a cada startup del portfolio']
+  },
+  REC:{
+    eyebrow:'M2 · Portfolio Monitoring',title:'Reuniones Recurrentes',sub:'Seguimiento activo continuo',
+    responsables:['Analyst','Partner'],storage:'Plataforma Tantauco + Granola',
+    description:'Proceso continuo durante toda la vida de la inversión. Reuniones mensuales de touch point con Granola, recolección trimestral de métricas via Quarterly form, y registro estructurado en plataforma.',
+    note:'<strong>Frecuencia:</strong> reunión mensual + Quarterly form trimestral (día 15 de abril, julio, octubre, enero).',
+    info:['KPIs del período','Updates del equipo y producto','Blockers y necesidades','Notas de la reunión anterior','Cambios en equipo, mercado o estrategia'],
+    tasks:['Preparar reunión: repasar notas anteriores y métricas','Realizar reunión mensual con Partner y verificar que Granola graba','Estructurar insights de transcripción post-reunión','Actualizar plataforma: métricas, notas, próximos pasos','Enviar Quarterly form el día 15 del mes trimestral','Analizar métricas del trimestre','Identificar oportunidades de valor y coordinar con Partner'],
+    events:['Reunión mensual agendada','Reunión realizada con Granola','Insights registrados en plataforma','Métricas actualizadas','Quarterly form enviado (día 15) y procesado'],
+    tools:['Google Meet','Granola','Plataforma Tantauco','Gmail'],
+    subs:[
+      {t:'Contenido estándar reunión mensual',d:'Estado general del negocio · Métricas clave (ARR/MRR, crecimiento, churn, runway) · Blockers y necesidades · Fundraising · Cambios en equipo, producto o estrategia.'},
+      {t:'Quarterly form',d:'MRR/ARR al cierre · Crecimiento MoM · Clientes activos · Churn rate · Burn rate y runway · Hitos cumplidos y proyectados · Novedades del equipo · Necesidades donde Tantauco puede apoyar.'}
+    ],
+    automations:['Bot de noticias pre-reunión con insights y preguntas útiles','Agente Granola → Plataforma Tantauco: estructura automáticamente notas y métricas','Agentes de señales por startup: LinkedIn, menciones en prensa, cambios de cargo']
+  },
+  SUP:{
+    eyebrow:'M3 · Portfolio Monitoring',title:'Soporte Activo',sub:'5 tracks de valor proactivos',
+    responsables:['Partner','Principal','Analyst'],storage:'Plataforma Tantauco',
+    description:'Más allá del capital, Tantauco busca ser un aliado real. El soporte activo cubre cinco tracks de valor concreto y corre en paralelo con las reuniones recurrentes de forma permanente.',
+    note:'El soporte <strong>no es reactivo</strong> — el equipo busca proactivamente formas de agregar valor según la etapa y tier de cada startup.',
+    info:['Necesidades actuales de la startup','BBDD de fondos de inversión','Red de empresas y contactos B2B en Chile','Perks y beneficios disponibles','Vacantes de hiring de las startups'],
+    tasks:['Identificar necesidades en cada reunión mensual','Coordinar intros a fondos o clientes B2B','Gestionar acceso a perks y beneficios','Publicar y difundir vacantes de hiring','Registrar todas las intros y su resultado en plataforma','Mantener grupo de WhatsApp activo','Explorar nuevas formas de entregar valor proactivamente'],
+    events:['Intro a fondo realizada y resultado registrado','Intro B2B realizada y resultado registrado','Perk activado','Sesión de apoyo estratégico realizada','Vacante publicada','Nueva forma de valor identificada'],
+    tools:['Gmail','LinkedIn','WhatsApp','Plataforma Tantauco','Notion perks'],
+    subs:[
+      {t:'Track 1 · Estrategia',d:'Apoyo del Partner en fundraising, revisión de deck y Data Room, expansión regional y decisiones estratégicas.'},
+      {t:'Track 2 · Intros a inversores',d:'BBDD de fondos para intros cuando la startup está levantando ronda. Se registra cada intro y resultado.'},
+      {t:'Track 3 · Intros B2B',d:'Conexiones con potenciales clientes o socios de la red de Tantauco en Chile y LATAM.'},
+      {t:'Track 4 · Perks',d:'Créditos de Anthropic, tokens, descuentos con proveedores. Pendiente: portal centralizado para founders.'},
+      {t:'Track 5 · Comunidad',d:'Grupo de WhatsApp activo con todas las startups del portfolio. El equipo envía mensajes regulares de valor.'}
+    ],
+    automations:['Portal de recursos del portfolio para founders (en desarrollo)','Matching automático de intros a fondos y B2B según perfil de la startup']
+  }
+};
 
-  // ── DIAGRAMAS ──────────────────────────────────────────────
-  const detailedDiagram = `%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FFFFFF', 'primaryTextColor': '#1C3A2A', 'primaryBorderColor': '#C4BAA8', 'lineColor': '#7A9585', 'edgeLabelBackground': '#F2EDE3', 'fontFamily': 'DM Sans', 'fontSize': '13px'}}}%%
+// ── DIAGRAMAS ── htmlLabels:false, \n nativo, stage nodes grandes via texto
+const detailedDiagram = `%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FFFFFF', 'primaryTextColor': '#1C3A2A', 'primaryBorderColor': '#C4BAA8', 'lineColor': '#7A9585', 'edgeLabelBackground': '#F2EDE3', 'fontFamily': 'DM Sans', 'fontSize': '13px'}}}%%
 flowchart LR
-classDef pipe fill:#EAF3DE,stroke:#3B6D11,stroke-width:2px,color:#1C3A2A
-classDef close fill:#E1F5EE,stroke:#0F6E56,stroke-width:2px,color:#085041
-classDef port fill:#EEEDFE,stroke:#534AB7,stroke-width:2px,color:#26215C
+classDef stage fill:#D4EDDA,stroke:#1C6B32,stroke-width:4px,color:#0A3D1A
+classDef pipe fill:#EAF3DE,stroke:#3B6D11,stroke-width:1.5px,color:#1C3A2A
+classDef close fill:#E1F5EE,stroke:#0F6E56,stroke-width:1.5px,color:#085041
+classDef closestage fill:#C5EBE0,stroke:#0A4D3C,stroke-width:4px,color:#0A3D1A
+classDef port fill:#EEEDFE,stroke:#534AB7,stroke-width:1.5px,color:#26215C
+classDef portstage fill:#D8D6FF,stroke:#3730A3,stroke-width:4px,color:#1A1760
 classDef declined fill:#FAEEDA,stroke:#BA7517,stroke-width:1.5px,color:#633806
 classDef hold fill:#F1EFE8,stroke:#888780,stroke-width:1.5px,color:#2C2C2A
 classDef action fill:#FFFFFF,stroke:#C4BAA8,stroke-width:1.5px,color:#1C3A2A
@@ -365,76 +334,83 @@ classDef memo fill:#FFF8E7,stroke:#C9A84C,stroke-width:2px,color:#7A4F00
 SEC0(["INVESTMENT PIPELINE"]):::section
 SEC0 --> SCOUTING
 
-SCOUTING["SCOUTING\nIdentificar startup"]:::pipe
-SCOUTING --> S1{"Fit\ncon tesis?"}
+SCOUTING["          🔍  SCOUTING          \nIdentificar y contactar startups\nFuentes · Thesis fit · Form"]:::stage
+SCOUTING --> S1{"Fit con\nla tesis?"}
 S1 -- No --> S1a["Descartar\nsin registrar"]:::declined
 S1 -- Si --> S2["Buscar contacto\nHarmonic → LinkedIn"]:::action
 S2 --> S3["Contactar al founder\nemail o LinkedIn"]:::action
 S3 --> S4["Enviar form\na la startup"]:::action
 S4 --> S5{"Form\nrecibido?"}
-S5 -- No responde --> S6["Revision mensual\nde forms sin respuesta"]:::action
+S5 -- No responde --> S6["Revision mensual\nsin respuesta"]:::action
 S6 --> S7{"2do\nintento?"}
-S7 -- No → reintento --> S3
+S7 -- No reintento --> S3
 S7 -- Si sin respuesta --> DECLINED1["DECLINED\nDeal creado en plataforma"]:::declined
 S5 -- Recibido --> S8{"Cumple\nla tesis?"}
-S8 -- No --> DECLINED2["DECLINED\nDeal creado con info guardada"]:::declined
+S8 -- No --> DECLINED2["DECLINED\nInfo guardada en plataforma"]:::declined
 S8 -- Si --> S9["Deal creado activo\nen plataforma"]:::action
 S9 --> S10["Agendar primera reunion\ncon el founder"]:::action
 S10 --> SCREENING
 
-SCREENING["SCREENING\nPrimera reunion"]:::pipe
+SCREENING["          🎙️  SCREENING          \nPrimera reunion con founder\nOverview · One Pager · Comite Screening"]:::stage
 SCREENING --> SC1["Grabar reunion con Granola\nFirst Meeting - Startup - Fecha"]:::action
 SC1 --> SC2["Cubrir: Problema · Solucion · Traccion\nEquipo · ICP · GTM · Ronda"]:::action
 SC2 --> SC3["Completar Overview obligatorio\nen Plataforma Tantauco"]:::action
 SC3 --> SC4["Generar One Pager\ncon skill de Claude"]:::action
-SC4 --> SC5["Comite Screening\nPresentacion 5 min + Fibonacci 1-13"]:::action
-SC5 --> SC6{"Suma\nvotos ≥ 16?"}
+SC4 --> SC5["Comite Screening\nPresentacion 5 min · Fibonacci 1-13"]:::action
+SC5 --> SC6{"Suma\nvotos >= 16?"}
 SC6 -- Suma menor 16 --> DECLINED3["DECLINED\nRegistrar en plataforma"]:::declined
 SC6 -- Suma 16 o mas --> SC7["Registrar votos y comentarios\nde cada participante"]:::action
 SC7 --> PRECOMITE
 
-PRECOMITE["PRE-COMITE\nAnalisis profundo"]:::pipe
+PRECOMITE["          📊  PRE-COMITE          \nAnalisis profundo · Sin Partners\nFibonacci · Recomendacion de inversion"]:::stage
 PRECOMITE --> PC1["Solicitar Data Room\nP&L · Demo del producto"]:::action
 PC1 --> PC2["Analisis profundo:\nMercado · Competencia · Cohortes\nUnit economics · Referencias"]:::action
-PC2 --> PC3["Si hay competencia en region\n→ contactar para inteligencia"]:::action
+PC2 --> PC3["Si hay competencia en region\ncontactar para inteligencia"]:::action
 PC3 --> PC4["Iniciar Investment Memo\nen Notion en paralelo"]:::memo
-PC4 --> PC5["Presentacion Pre-Comite\nFibonacci 1-13"]:::action
-PC5 --> PC6{"Suma\nvotos ≥ 16?"}
-PC6 -- Suma menor 16 --> PC6a{"Declinar\no Hold?"}
-PC6a -- No interesa --> DECLINED4["DECLINED"]:::declined
-PC6a -- Mal timing --> HOLD1["HOLD\nRecontacto cada 2 meses"]:::hold
-PC6 -- Suma 16 o mas con dudas --> PC7["Q&A por email\ncon founders\nDudas en plataforma"]:::action
-PC7 --> PC8{"Q&A despejo\nlas dudas?"}
-PC8 -- No --> DECLINED4
-PC8 -- Si --> COMITEI
-PC6 -- Suma 16 o mas sin dudas --> COMITEI
+PC4 --> PC5{"Info suficiente\npara votar?"}
+PC5 -- No, falta info --> PC2
+PC5 -- Si --> PC6["Presentacion Pre-Comite\nFibonacci 1-13"]:::action
+PC6 --> PC7{"Suma\nvotos >= 16?"}
+PC7 -- Suma menor 16 --> PC7a{"Declinar\no Hold?"}
+PC7a -- No interesa --> DECLINED4["DECLINED"]:::declined
+PC7a -- Mal timing --> HOLD1["HOLD\nRecontacto cada 2 meses"]:::hold
+PC7 -- Suma 16 con dudas --> PC8["Q&A por email\ncon founders"]:::action
+PC8 --> PC9{"Q&A despejo\nlas dudas?"}
+PC9 -- No --> DECLINED4
+PC9 -- Si --> COMITEI
+PC7 -- Suma 16 sin dudas --> COMITEI
 
-COMITEI["COMITE INTERNO\nDecision oficial Tantauco"]:::pipe
+COMITEI["          🏛️  COMITE INTERNO          \nTodo el equipo · Decision oficial\nFibonacci · Veto Partners"]:::stage
 COMITEI --> CI1["Coordinar segunda reunion\nAnalyst + Partner + Founders"]:::action
 CI1 --> CI2["Segunda reunion con founders\nLidera Partner · Granola activado"]:::action
 CI2 --> CI3["Continuar avanzando\nInvestment Memo en paralelo"]:::memo
-CI3 --> CI4["Presentacion Comite Interno\nFibonacci 1-13 · Todo el equipo"]:::action
-CI4 --> CI5{"Condicion A:\nVotos Partners ≥ 16?\no Condicion B:\nAlguien vota 13?"}
-CI5 -- Veto Partner o\nninguna condicion --> CI5a{"Declinar\no Hold?"}
-CI5a -- No convence --> DECLINED5["DECLINED"]:::declined
-CI5a -- No es el momento --> HOLD2["HOLD\nRecontacto cada 2 meses"]:::hold
-CI5 -- Condicion A o B\ncumplida --> CI6["Definir fecha\ndel External Committee"]:::action
-CI6 --> MEMO_FIN
+CI3 --> CI4{"Partners necesitan\nmas analisis o Q&A?"}
+CI4 -- Si, profundizar --> CI5["Analisis adicional o\nQ&A con founders"]:::action
+CI5 --> CI6{"Dudas\nresueltas?"}
+CI6 -- No, seguir --> CI5
+CI6 -- Si --> CI7["Presentacion Comite Interno\nFibonacci 1-13 · Todo el equipo"]:::action
+CI4 -- No, listo para votar --> CI7
+CI7 --> CI8{"Condicion A votos\nPartners >= 16?\no Condicion B\nalguien vota 13?"}
+CI8 -- Veto Partner o ninguna condicion --> CI8a{"Declinar\no Hold?"}
+CI8a -- No convence --> DECLINED5["DECLINED"]:::declined
+CI8a -- No es el momento --> HOLD2["HOLD\nRecontacto cada 2 meses"]:::hold
+CI8 -- Condicion A o B cumplida --> CI9["Definir fecha del\nExternal Committee"]:::action
+CI9 --> MEMO_FIN
 
-MEMO_FIN["INVESTMENT MEMO\nRevisar y aprobar"]:::memo
-MEMO_FIN --> MF1["Todo el equipo\nrevisa y comenta el memo"]:::action
+MEMO_FIN["📝  INVESTMENT MEMO\nRevision final"]:::memo
+MEMO_FIN --> MF1["Todo el equipo revisa\ny comenta el memo"]:::action
 MF1 --> MF2["Partner aprueba\nel memo"]:::action
 MF2 --> EC
 
-EC["EXTERNAL COMMITTEE\nDecision final"]:::close
+EC["          🤝  EXTERNAL COMMITTEE          \nDecision final · Partners + Advisors\nVenture Partner requerido"]:::closestage
 EC --> EC1["Partner envia memo\na todos con anticipacion"]:::action
 EC1 --> EC2["Reunion EC:\nPartners + Venture Partner + Advisors"]:::action
 EC2 --> EC3{"Aprobado\npor EC?"}
 EC3 -- Rechazado --> DECLINED6["DECLINED"]:::declined
 EC3 -- Aprobado --> DD
 
-DD["DUE DILIGENCE LEGAL\nPartner + Abogados"]:::close
-DD --> DD1["Contratar abogados externos\n+ compartir Data Room"]:::action
+DD["          ⚖️  DUE DILIGENCE LEGAL          \nTerm Sheet + DD Legal en paralelo\nPartner · Abogados externos"]:::closestage
+DD --> DD1["Contratar abogados externos\ncompartir Data Room"]:::action
 DD1 --> DD2["En paralelo:\nTerm Sheet + DD Legal completa\nCap table · IP · Contratos · Litigios"]:::action
 DD2 --> DD3{"Red flags\ngraves?"}
 DD3 -- Bloqueantes --> DECLINED7["DECLINED"]:::declined
@@ -442,7 +418,7 @@ DD3 -- Negociables --> DD4["Negociar y resolver\ncondiciones"]:::action
 DD3 -- Sin issues --> INVESTED
 DD4 --> INVESTED
 
-INVESTED["INVESTED\nCierre formal"]:::close
+INVESTED["          💼  INVESTED          \nCierre formal · Firma · Transferencia\nRegistro en Carta + Plataforma"]:::closestage
 INVESTED --> INV1["Firma documentos\nSHA · SPA · cierre"]:::action
 INV1 --> INV2["Transferencia de fondos"]:::action
 INV2 --> INV3["Registrar en Carta\n+ Plataforma Tantauco"]:::action
@@ -452,20 +428,20 @@ INV4 --> SEC1
 SEC1(["PORTFOLIO MONITORING"]):::section
 SEC1 --> ONB
 
-ONB["ONBOARDING\nBienvenida al portfolio"]:::port
-ONB --> ON1["Asignar dupla\nPartner + Analyst"]:::action
-ON1 --> ON2["Categorizacion inicial:\ntier · cercania · areas de valor"]:::action
-ON2 --> ON3["Onboarding email:\nFounder form + Quarterly form"]:::action
-ON3 --> ON4["Kick-off con founders\nGranola activado"]:::action
-ON4 --> ON5["Estructurar insights\nen plataforma"]:::action
-ON5 --> ON6["Agendar reuniones\nrecurrentes"]:::action
+ONB["          🤝  ONBOARDING          \nBienvenida · Perks · Quarterly form\nWhatsApp · Cap table"]:::portstage
+ONB --> ON1["Correo de bienvenida\nal portfolio"]:::action
+ON1 --> ON2["Compartir info sobre\nperks disponibles"]:::action
+ON2 --> ON3["Explicar Quarterly Report\ny solicitar actual + trimestre anterior"]:::action
+ON3 --> ON4["Agendar reunion\nrecurrente mensual"]:::action
+ON4 --> ON5["Agregar al founder\nal grupo de WhatsApp"]:::action
+ON5 --> ON6["Solicitar cap table actualizado\ncon nueva ronda"]:::action
 ON6 --> SEC2
 
 SEC2(["Reuniones Recurrentes + Soporte Activo\noperan en paralelo"]):::section
 SEC2 --> REC
 SEC2 --> SUP
 
-REC["REUNIONES RECURRENTES\nSeguimiento continuo"]:::port
+REC["          📅  REUNIONES RECURRENTES          \nSeguimiento mensual continuo\nGranola · Quarterly form trimestral"]:::portstage
 REC --> RE1["Preparar reunion:\nnotas anteriores + metricas"]:::action
 RE1 --> RE2["Reunion mensual\nPartner + Analyst + Granola"]:::action
 RE2 --> RE3["Estructurar insights\nde transcripcion Granola"]:::action
@@ -477,18 +453,18 @@ RE7 --> RE8["Identificar oportunidades\nde valor"]:::action
 RE5 -- No --> RE8
 RE8 --> RE2
 
-SUP["SOPORTE ACTIVO\nEntrega de valor"]:::port
+SUP["          🚀  SOPORTE ACTIVO          \n5 tracks de valor proactivos\nEstrategia · Intros · Perks · Comunidad"]:::portstage
 SUP --> SU1["Track 1 · Estrategia\nfundraising · deck · expansion"]:::action
 SUP --> SU2["Track 2 · Intros inversores\nBBDD de fondos LATAM"]:::action
 SUP --> SU3["Track 3 · Intros B2B\nred Chile + LATAM"]:::action
 SUP --> SU4["Track 4 · Perks\nAnthropic · tokens · descuentos"]:::action
 SUP --> SU5["Track 5 · Comunidad\nWhatsApp + mensajes de valor"]:::action`;
 
-  const compactDiagram = `%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FFFFFF', 'primaryTextColor': '#1C3A2A', 'primaryBorderColor': '#C4BAA8', 'lineColor': '#7A9585', 'edgeLabelBackground': '#F2EDE3', 'fontFamily': 'DM Sans', 'fontSize': '13px'}}}%%
+const compactDiagram = `%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FFFFFF', 'primaryTextColor': '#1C3A2A', 'primaryBorderColor': '#C4BAA8', 'lineColor': '#7A9585', 'edgeLabelBackground': '#F2EDE3', 'fontFamily': 'DM Sans', 'fontSize': '13px'}}}%%
 flowchart LR
-classDef pipe fill:#EAF3DE,stroke:#3B6D11,stroke-width:2px,color:#1C3A2A
-classDef close fill:#E1F5EE,stroke:#0F6E56,stroke-width:2px,color:#085041
-classDef port fill:#EEEDFE,stroke:#534AB7,stroke-width:2px,color:#26215C
+classDef stage fill:#D4EDDA,stroke:#1C6B32,stroke-width:4px,color:#0A3D1A
+classDef closestage fill:#C5EBE0,stroke:#0A4D3C,stroke-width:4px,color:#0A3D1A
+classDef portstage fill:#D8D6FF,stroke:#3730A3,stroke-width:4px,color:#1A1760
 classDef declined fill:#FAEEDA,stroke:#BA7517,stroke-width:1.5px,color:#633806
 classDef hold fill:#F1EFE8,stroke:#888780,stroke-width:1.5px,color:#2C2C2A
 classDef section fill:#1C3A2A,stroke:#C9A84C,stroke-width:2px,color:#F2EDE3
@@ -497,49 +473,51 @@ classDef memo fill:#FFF8E7,stroke:#C9A84C,stroke-width:2px,color:#7A4F00
 SEC0(["INVESTMENT PIPELINE"]):::section
 SEC0 --> SCOUTING
 
-SCOUTING["SCOUTING\nIdentificar · Contactar · Form"]:::pipe
+SCOUTING["          🔍  SCOUTING          \nIdentificar · Contactar · Form\nFuentes · Thesis fit"]:::stage
 SCOUTING --> SCREENING
 SCOUTING -. Form no cumple tesis .-> DECLINED["DECLINED"]:::declined
 SCOUTING -. Sin respuesta x2 .-> DECLINED
 
-SCREENING["SCREENING\nReunion · Overview · Comite Screening"]:::pipe
+SCREENING["          🎙️  SCREENING          \nPrimera reunion · Overview\nComite Screening · Fibonacci"]:::stage
 SCREENING --> PRECOMITE
 SCREENING -. Suma votos menor 16 .-> DECLINED
 
-PRECOMITE["PRE-COMITE\nAnalisis profundo · Fibonacci"]:::pipe
-PRECOMITE -. Memo en paralelo .-> MEMO["INVESTMENT MEMO\nSe arma en paralelo"]:::memo
+PRECOMITE["          📊  PRE-COMITE          \nAnalisis profundo · Sin Partners\nFibonacci · Recomendacion"]:::stage
+PRECOMITE -. Memo en paralelo .-> MEMO["📝  INVESTMENT MEMO\nSe arma en paralelo"]:::memo
+PRECOMITE -. Info insuficiente loop .-> PRECOMITE
 PRECOMITE --> COMITEI
 PRECOMITE -. No interesa .-> DECLINED
 PRECOMITE -. Mal timing .-> HOLD["HOLD\nRecontacto cada 2 meses"]:::hold
 
-COMITEI["COMITE INTERNO\nDecision oficial · Todo el equipo"]:::pipe
+COMITEI["          🏛️  COMITE INTERNO          \nTodo el equipo · Decision oficial\nFibonacci · Veto Partners"]:::stage
+COMITEI -. Necesita mas analisis loop .-> COMITEI
 COMITEI --> EC
 COMITEI -. No convence .-> DECLINED
 COMITEI -. Hold .-> HOLD
 MEMO -. Aprobado por Partner .-> EC
 
-EC["EXTERNAL COMMITTEE\nDecision final · Partners + Advisors"]:::close
+EC["          🤝  EXTERNAL COMMITTEE          \nDecision final · Partners + Advisors\nVenture Partner requerido"]:::closestage
 EC --> DD
 EC -. Rechazado .-> DECLINED
 
-DD["DUE DILIGENCE LEGAL\nTerm sheet · DD · Abogados"]:::close
+DD["          ⚖️  DUE DILIGENCE LEGAL          \nTerm Sheet + DD Legal en paralelo\nPartner · Abogados externos"]:::closestage
 DD --> INVESTED
 DD -. Red flags graves .-> DECLINED
 
-INVESTED["INVESTED\nCierre formal"]:::close
+INVESTED["          💼  INVESTED          \nCierre formal · Firma · Transferencia\nRegistro Carta + Plataforma"]:::closestage
 INVESTED --> SEC1
 
 SEC1(["PORTFOLIO MONITORING"]):::section
 SEC1 --> ONB
 
-ONB["ONBOARDING\nBienvenida · Kick-off · Categorizacion"]:::port
+ONB["          🤝  ONBOARDING          \nBienvenida · Perks · Quarterly form\nWhatsApp · Cap table"]:::portstage
 ONB --> REC
 ONB --> SUP
 
-REC["REUNIONES RECURRENTES\nMensual + Quarterly form trimestral"]:::port
-SUP["SOPORTE ACTIVO\n5 tracks de valor proactivos"]:::port`;
+REC["          📅  REUNIONES RECURRENTES          \nSeguimiento mensual continuo\nGranola · Quarterly form trimestral"]:::portstage
+SUP["          🚀  SOPORTE ACTIVO          \n5 tracks de valor proactivos\nEstrategia · Intros · Perks · Comunidad"]:::portstage`;
 
-  // ── PANEL RENDER ───────────────────────────────────────────
+  // ── PANEL RENDER ──────────────────────────────────────
   function renderPanel(key) {
     let dataKey = key;
     if (key.startsWith('DECLINED')) dataKey = 'DECLINED';
@@ -558,20 +536,16 @@ SUP["SOPORTE ACTIVO\n5 tracks de valor proactivos"]:::port`;
     let html = '';
     if (d.description) html += `<div class="panel-section"><h4>Descripcion</h4><p>${d.description}</p></div>`;
     if (d.note) html += `<div class="panel-section"><div class="nbox">${d.note}</div></div>`;
-
     if (d.voto) {
-      html += `<div class="panel-section">
-        <h4>Votacion Fibonacci</h4>
+      html += `<div class="panel-section"><h4>Votacion Fibonacci</h4>
         <div class="vote-box">
           <h5>${d.voto.titulo}</h5>
           <p><strong>Participantes:</strong> ${d.voto.participantes}</p>
           <p style="margin-top:6px"><strong>Escala:</strong> ${d.voto.escala}</p>
-          <div class="rule" style="margin-top:10px;white-space:pre-line"><strong>Regla de aprobacion:</strong><br>${d.voto.regla}</div>
+          <div class="rule" style="margin-top:10px"><strong>Regla de aprobacion:</strong><br>${d.voto.regla}</div>
           <p style="margin-top:8px;font-size:11px;color:var(--text3)">${d.voto.extra}</p>
-        </div>
-      </div>`;
+        </div></div>`;
     }
-
     if (d.storage) html += `<div class="panel-section"><h4>Storage</h4><p style="font-family:monospace;font-size:12px">${d.storage}</p></div>`;
     if (d.info?.length) html += `<div class="panel-section"><h4>Informacion requerida</h4><ul class="item-list">${d.info.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
     if (d.tasks?.length) html += `<div class="panel-section"><h4>Tareas</h4><ul class="item-list">${d.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
@@ -590,12 +564,10 @@ SUP["SOPORTE ACTIVO\n5 tracks de valor proactivos"]:::port`;
 
   function closePanel() { document.getElementById('sidePanel').classList.remove('open'); }
 
-  // ── MERMAID ────────────────────────────────────────────────
+  // ── MERMAID ───────────────────────────────────────────
   mermaid.initialize({
-    startOnLoad: false,
-    theme: 'base',
-    securityLevel: 'loose',
-    flowchart: { curve:'basis', padding:20, nodeSpacing:50, rankSpacing:60, htmlLabels:false, useMaxWidth:false }
+    startOnLoad:false, theme:'base', securityLevel:'loose',
+    flowchart:{curve:'basis',padding:28,nodeSpacing:60,rankSpacing:80,htmlLabels:false,useMaxWidth:false}
   });
 
   let currentView = 'detailed';
@@ -605,12 +577,12 @@ SUP["SOPORTE ACTIVO\n5 tracks de valor proactivos"]:::port`;
 
   async function renderDiagram() {
     const div = document.getElementById('mermaidDiv');
-    div.innerHTML = currentView === 'detailed' ? detailedDiagram : compactDiagram;
+    div.innerHTML = currentView==='detailed' ? detailedDiagram : compactDiagram;
     div.removeAttribute('data-processed');
     try {
-      await mermaid.run({ nodes:[div] });
+      await mermaid.run({nodes:[div]});
       attachClickHandlers();
-    } catch(e) { console.error('Mermaid error:', e); }
+    } catch(e) { console.error('Mermaid error:',e); }
   }
 
   function attachClickHandlers() {
@@ -628,65 +600,57 @@ SUP["SOPORTE ACTIVO\n5 tracks de valor proactivos"]:::port`;
     });
   }
 
-  // ── ZOOM & PAN ─────────────────────────────────────────────
+  // ── ZOOM & PAN ────────────────────────────────────────
   let scale=0.6, translateX=40, translateY=40;
   let isDragging=false, startX, startY, startTX, startTY;
   const viewport = document.getElementById('viewport');
   const diagramArea = document.getElementById('diagramArea');
   const zoomDisplay = document.getElementById('zoomDisplay');
 
-  function applyTransform() {
-    viewport.style.transform = `translate(${translateX}px,${translateY}px) scale(${scale})`;
-    zoomDisplay.textContent = Math.round(scale*100)+'%';
+  function applyTransform(){viewport.style.transform=`translate(${translateX}px,${translateY}px) scale(${scale})`;zoomDisplay.textContent=Math.round(scale*100)+'%';}
+  function zoomIn(){scale=Math.min(scale*1.25,10);applyTransform();}
+  function zoomOut(){scale=Math.max(scale/1.25,0.05);applyTransform();}
+  function resetView(){scale=0.6;translateX=40;translateY=40;applyTransform();}
+  function fitView(){
+    const area=diagramArea.getBoundingClientRect();
+    const svg=document.querySelector('.mermaid svg');
+    if(!svg)return;
+    const bb=svg.getBoundingClientRect();
+    const nw=bb.width/scale,nh=bb.height/scale;
+    const ns=Math.min((area.width-80)/nw,(area.height-80)/nh,1);
+    scale=ns;translateX=(area.width-nw*ns)/2;translateY=30;applyTransform();
   }
-  function zoomIn() { scale=Math.min(scale*1.25,10); applyTransform(); }
-  function zoomOut() { scale=Math.max(scale/1.25,0.05); applyTransform(); }
-  function resetView() { scale=0.6; translateX=40; translateY=40; applyTransform(); }
-  function fitView() {
-    const area = diagramArea.getBoundingClientRect();
-    const svg = document.querySelector('.mermaid svg');
-    if (!svg) return;
-    const bb = svg.getBoundingClientRect();
-    const nw = bb.width/scale, nh = bb.height/scale;
-    const ns = Math.min((area.width-80)/nw, (area.height-80)/nh, 1);
-    scale=ns; translateX=(area.width-nw*ns)/2; translateY=30;
-    applyTransform();
-  }
-  function toggleView() {
-    currentView = currentView==='detailed' ? 'compact' : 'detailed';
-    document.getElementById('viewToggle').textContent = currentView==='detailed' ? 'Vista Detallada' : 'Vista Compacta';
+  function toggleView(){
+    currentView=currentView==='detailed'?'compact':'detailed';
+    document.getElementById('viewToggle').textContent=currentView==='detailed'?'Vista Detallada':'Vista Compacta';
     closePanel();
-    renderDiagram().then(() => setTimeout(fitView, 400));
+    renderDiagram().then(()=>setTimeout(fitView,400));
   }
 
-  diagramArea.addEventListener('wheel', e => {
+  diagramArea.addEventListener('wheel',e=>{
     e.preventDefault();
-    const delta = e.deltaY>0 ? 0.9 : 1.1;
-    const rect = diagramArea.getBoundingClientRect();
-    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+    const delta=e.deltaY>0?0.9:1.1;
+    const rect=diagramArea.getBoundingClientRect();
+    const mx=e.clientX-rect.left,my=e.clientY-rect.top;
     const ns=Math.max(0.05,Math.min(10,scale*delta));
-    translateX=mx-(mx-translateX)*(ns/scale);
-    translateY=my-(my-translateY)*(ns/scale);
-    scale=ns; applyTransform();
+    translateX=mx-(mx-translateX)*(ns/scale);translateY=my-(my-translateY)*(ns/scale);
+    scale=ns;applyTransform();
   },{passive:false});
 
-  diagramArea.addEventListener('mousedown', e => {
-    if (e.target.closest('.side-panel')||e.target.closest('.clickable')) return;
-    isDragging=true; startX=e.clientX; startY=e.clientY; startTX=translateX; startTY=translateY;
+  diagramArea.addEventListener('mousedown',e=>{
+    if(e.target.closest('.side-panel')||e.target.closest('.clickable'))return;
+    isDragging=true;startX=e.clientX;startY=e.clientY;startTX=translateX;startTY=translateY;
     e.preventDefault();
   });
-  document.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    translateX=startTX+(e.clientX-startX); translateY=startTY+(e.clientY-startY); applyTransform();
-  });
-  document.addEventListener('mouseup', () => { isDragging=false; });
+  document.addEventListener('mousemove',e=>{if(!isDragging)return;translateX=startTX+(e.clientX-startX);translateY=startTY+(e.clientY-startY);applyTransform();});
+  document.addEventListener('mouseup',()=>{isDragging=false;});
 
-  window.zoomIn=zoomIn; window.zoomOut=zoomOut; window.resetView=resetView;
-  window.fitView=fitView; window.toggleView=toggleView; window.closePanel=closePanel;
+  window.zoomIn=zoomIn;window.zoomOut=zoomOut;window.resetView=resetView;
+  window.fitView=fitView;window.toggleView=toggleView;window.closePanel=closePanel;
 
-  renderDiagram().then(() => {
+  renderDiagram().then(()=>{
     applyTransform();
-    setTimeout(() => { const h=document.getElementById('hint'); if(h) h.style.opacity='0'; }, 5000);
+    setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
   });
 </script>
 </body>
