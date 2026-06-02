@@ -384,12 +384,7 @@ COMITEI["          🏛️  COMITE INTERNO          \nTodo el equipo · Decision
 COMITEI --> CI1["Coordinar segunda reunion\nAnalyst + Partner + Founders"]:::action
 CI1 --> CI2["Segunda reunion con founders\nLidera Partner · Granola activado"]:::action
 CI2 --> CI3["Continuar avanzando\nInvestment Memo en paralelo"]:::memo
-CI3 --> CI4{"Partners necesitan\nmas analisis o Q&A?"}
-CI4 -- Si, profundizar --> CI5["Analisis adicional o\nQ&A con founders"]:::action
-CI5 --> CI6{"Dudas\nresueltas?"}
-CI6 -- No, seguir --> CI5
-CI6 -- Si --> CI7["Presentacion Comite Interno\nFibonacci 1-13 · Todo el equipo"]:::action
-CI4 -- No, listo para votar --> CI7
+CI3 --> CI7["Presentacion Comite Interno\nFibonacci 1-13 · Todo el equipo"]:::action
 CI7 --> CI8{"Condicion A votos\nPartners >= 16?\no Condicion B\nalguien vota 13?"}
 CI8 -- Veto Partner o ninguna condicion --> CI8a{"Declinar\no Hold?"}
 CI8a -- No convence --> DECLINED5["DECLINED"]:::declined
